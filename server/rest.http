@@ -1,0 +1,15 @@
+GET http://localhost:3000/movies
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJ1c2VyIiwiaWF0IjoxNTU4MDgyNjg0LCJleHAiOjE1NTgwODYyODR9.j31p8By1dRLr6Qtv10uLlkZDB8YMFJndqFplV-NpCyE
+
+###
+POST http://localhost:3000/movies
+Content-Type: application/json
+
+{
+    "title": "Avengers 5",
+    "createdAt": "2019-04-23T17:24:57.291Z",
+    "year": 2019,
+    "category": "Action"
+}
+
+###

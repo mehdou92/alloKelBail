@@ -39,7 +39,6 @@ services:
     volumes:
       - './../client:/home/node/app'
     working_dir: '/home/node/app'
-    command: 'yarn start'
     ports:
       - 127.0.0.1:3001:3000
 

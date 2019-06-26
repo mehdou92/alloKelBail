@@ -1,2 +1,5 @@
 FROM node:10-alpine
-CMD yarn install && yarn start
+
+RUN yarn global add create-react-app
+
+EXPOSE 3000

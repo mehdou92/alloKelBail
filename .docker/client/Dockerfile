@@ -1,5 +1,3 @@
 FROM node:10-alpine
-
-RUN yarn install && yarn start
-
-EXPOSE 3000
+WORKDIR /app
+CMD yarn install && yarn start

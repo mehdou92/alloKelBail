@@ -1,15 +1,15 @@
 const express = require('express');
-const Movie = require('../models/movie');
+const User = require('../models/user');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    console.log('movie');
-    Movie.find().then(data => res.json(data));
-});
+    User.find().then(data => res.json(data));
+})
+
 
 router.post('/', (req, res) => {
-    const movie = new Movie(req.body);
-    movie.save()
+    const user = new User(req.body);
+    user.save()
     .then(data => res.status(201).json(data))
     .catch(
         error => {

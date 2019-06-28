@@ -9,7 +9,7 @@ router.post('/login_check', (req, res) => {
   User.login(req.body.email,req.body.password).then(() =>
   {
     const token = createToken({
-      firstName:'user',
+      firstName:'user', //change for firstname lastname of the real user
       lastName:'user',
     });
     res.status(201).send({token});

@@ -5,7 +5,7 @@ const User = require('../models/user');
 const router = express.Router();
 
 router.post('/login_check', (req, res) => {
-  console.log(User.login(req.body.email,req.body.password));
+  //console.log(User.login(req.body.email,req.body.password));
   User.login(req.body.email,req.body.password).then(() =>
   {
     const token = createToken({

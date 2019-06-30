@@ -12,9 +12,9 @@ const app = express();
 
 app.use(bodyparser.json());
 app.use('/', securityRouter);
+app.use('/users', userRouter);
 app.use(verifyToken);
 app.use('/movies', movieRouter);
-app.use('/users', userRouter);
 
 app.listen(3000, () => {
     console.log('Listening');

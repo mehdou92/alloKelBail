@@ -14,7 +14,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 import useForm from '../../hooks/useForm';
-
+import validate from '../../rules/LoginFormValidationRules';
 
 
 function MadeWithLove() {
@@ -56,12 +56,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function SignIn() {
 
-    const [email, setEmail] = useState(null);
-    const [password, setPassword] = useState(null);
-
-
-
-    const {values, handleChange, handleSubmit } = useForm(handleSignIn);
+    const {values, handleChange, handleSubmit, errors } = useForm(handleSignIn, validate);
 
     function handleSignIn(){
         console.log(values);
@@ -86,12 +81,13 @@ export default function SignIn() {
                         required
                         fullWidth
                         id="email"
-                        label="Email Address"
+                        label={errors.email ? errors.email : "Email Address"}
                         name="email"
                         autoComplete="email"
                         autoFocus
                         onChange={handleChange}
                         value={values.email || ''}
+                        error={errors.email ? true : false}
                     />
                     <TextField
                         variant="outlined"

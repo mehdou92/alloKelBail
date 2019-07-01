@@ -7,8 +7,11 @@ const userRouter = require('./routes/user');
 const securityRouter = require('./routes/security');
 const verifyToken = require('./middlewares/security');
 const bodyparser = require('body-parser');
+const cors = require('cors');
 
 const app = express();
+
+app.use(cors());
 
 app.use(bodyparser.json());
 app.use('/', securityRouter);

@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Navbar from '../Navbar';
 import SignIn from '../SignIn';
 import { TodoContext } from '../../store/TodoContext';
 
 function App() {
+
+  const [isLogged, setLogged] = useState(false);
+
   return (
     <div className="App">
       {/* <TodoContext.Provider
@@ -18,7 +21,7 @@ function App() {
 
 
       {/* <Navbar /> */}
-      <SignIn />
+      <SignIn isLogged={isLogged} />
     </div>
   );
 }

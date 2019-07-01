@@ -29,30 +29,6 @@ function MadeWithLove() {
     );
 }
 
-function checkCredidential(values){
-    
-    const credidentials = {
-        email: values.email,
-        password: values.password
-    };
-
-    fetch("http://localhost:3000/login_check",
-        {
-            method: "post",
-            body: JSON.stringify(credidentials),
-            headers: {
-                'Content-type': 'application/json'
-            }
-        }
-    )
-    .then(function(res){
-        return res.json();
-    })
-    .then(function(data) {
-        console.log(JSON.stringify(data));
-    })
-}
-
 const useStyles = makeStyles(theme => ({
     '@global': {
         body: {
@@ -80,10 +56,39 @@ const useStyles = makeStyles(theme => ({
 
 export default function SignIn(props) {
 
+    const [token, setToken] = useState(null);
     const { values, handleChange, handleSubmit, errors } = useForm(handleSignIn, validate);
 
     function handleSignIn() {
         checkCredidential(values);
+    }
+
+    function checkCredidential(values){
+    
+        const credidentials = {
+            email: values.email,
+            password: values.password
+        };
+    
+        fetch("http://localhost:3000/login_check",
+            {
+                method: "post",
+                body: JSON.stringify(credidentials),
+                headers: {
+                    'Content-type': 'application/json'
+                }
+            }
+        )
+        .then(function(res){
+            return res.json();
+        })
+        .then(function(data) {
+            console.log(JSON.stringify(data));
+            setToken(JSON.stringify(data));
+        })
+        .catch(function (error){
+            console.error(error);
+        })
     }
 
     const classes = useStyles();

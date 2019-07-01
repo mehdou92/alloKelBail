@@ -3,7 +3,6 @@ const Movie = require('../models/movie');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    console.log('movie');
     Movie.find().then(data => res.json(data));
 });
 
@@ -20,5 +19,6 @@ router.post('/', (req, res) => {
             }
         }
     )
-})
+});
+
 module.exports = router;

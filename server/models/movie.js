@@ -2,11 +2,11 @@ const db = require('../lib/db');
 const mongoose = require('mongoose');
 
 const MovieSchema = new mongoose.Schema({
-    title: String,
-    year: String,
-    released: String,
-    runtime: String,
-    genre: String,
+    Title: String,
+    Year: String,
+    Released: String,
+    Runtime: String,
+    Genre: String,
     // genre: {
     //     type: [String],
     //     enum: ["Action",
@@ -37,9 +37,10 @@ const MovieSchema = new mongoose.Schema({
     //         "War",
     //         "Western"]
     // }
-    plot: String,
-    language: String,
-    rating: {
+    Plot: String,
+    Language: String,
+    Poster: String,
+    Ratings: {
         Source: String,
         Value: String
     },
@@ -56,4 +57,6 @@ MovieSchema.post('save', function (doc) {
     console.log(doc.title + ' is saved!');
 });
 
-module.exports = db.model('Movie', MovieSchema); //movies
+const Model = db.model('Movie', MovieSchema);
+
+module.exports = Model; //movies

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -15,6 +15,8 @@ import Container from '@material-ui/core/Container';
 
 import useForm from '../../hooks/useForm';
 import validate from '../../rules/LoginFormValidationRules';
+
+import { AuthContext } from '../Auth/AuthProvider';
 
 
 function MadeWithLove() {
@@ -56,39 +58,15 @@ const useStyles = makeStyles(theme => ({
 
 export default function SignIn(props) {
 
-    const [token, setToken] = useState(null);
     const { values, handleChange, handleSubmit, errors } = useForm(handleSignIn, validate);
+    let { login } = useContext(AuthContext);
 
     function handleSignIn() {
         checkCredidential(values);
     }
 
     function checkCredidential(values){
-    
-        const credidentials = {
-            email: values.email,
-            password: values.password
-        };
-    
-        fetch("http://localhost:3000/login_check",
-            {
-                method: "post",
-                body: JSON.stringify(credidentials),
-                headers: {
-                    'Content-type': 'application/json'
-                }
-            }
-        )
-        .then(function(res){
-            return res.json();
-        })
-        .then(function(data) {
-            console.log(JSON.stringify(data));
-            setToken(JSON.stringify(data));
-        })
-        .catch(function (error){
-            console.error(error);
-        })
+        login(values.email, values.password);
     }
 
     const classes = useStyles();

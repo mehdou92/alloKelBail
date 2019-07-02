@@ -18,7 +18,6 @@ router.post('/login_check', (req, res) => {
 });
 
 router.post('/register', (req, res) => {
-  console.log('REGISTER');
   const user = new User(req.body);
   user.register().then(data => res.status(200).json(data))
     .catch(error => {

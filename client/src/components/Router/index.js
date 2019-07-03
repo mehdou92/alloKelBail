@@ -1,12 +1,16 @@
 import React from "react";
-import { Route } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 import SignIn from "../SignIn";
-import Home from "../App"
 
 const Router = () => (
     <>
         {/* <Route path="/" exact component={Home} /> */}
         <Route path="/login" exact component={SignIn} />
+        <Route path="/profile" exact component={SignIn} />
+        <Route path="/logout" render={() => (
+            <Redirect to="/" />
+        )} />
+        <Route path="/register" exact component={SignIn} />
     </>
 );
 

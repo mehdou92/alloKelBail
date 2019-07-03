@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { BrowserRouter, Link } from "react-router-dom";
 import Router from '../Router';
 import { fade, makeStyles } from '@material-ui/core/styles';
@@ -16,6 +16,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import { AuthContext } from '../Auth/AuthProvider';
 
 const useStyles = makeStyles(theme => ({
   grow: {
@@ -87,6 +88,10 @@ export default function PrimarySearchAppBar(props) {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
+  const { user, logout } = useContext(AuthContext);
+
+  console.log('User token :', user);
+
   function handleProfileMenuOpen(event) {
     setAnchorEl(event.currentTarget);
   }
@@ -104,7 +109,39 @@ export default function PrimarySearchAppBar(props) {
     setMobileMoreAnchorEl(event.currentTarget);
   }
 
+  function handleLogout(){
+    handleMenuClose();
+    logout();
+  }
+
+  const loggedMenu = () => {
+    return [
+      <>
+      <Link to="/profile">
+        <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      </Link>
+      <Link to="/logout" >
+        <MenuItem onClick={handleLogout}>Logout</MenuItem>
+      </Link>
+      </>
+    ]
+  };
+
+  const unloggedMenu = () => {
+    return [
+      <>
+      <Link to="/login" >
+        <MenuItem onClick={handleMenuClose}>Sign In</MenuItem>
+      </Link>
+      <Link to="/register" >
+        <MenuItem onClick={handleMenuClose}>Register</MenuItem>
+      </Link>
+      </>
+    ]
+  }
+
   const menuId = 'primary-search-account-menu';
+
   const renderMenu = (
     <BrowserRouter>
       <Menu
@@ -116,11 +153,7 @@ export default function PrimarySearchAppBar(props) {
         open={isMenuOpen}
         onClose={handleMenuClose}
       >
-        <Link to="/login" >
-          <MenuItem onClick={handleMenuClose}>Sign In</MenuItem>
-        </Link>
-        <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-        <MenuItem onClick={handleMenuClose}>Log Out</MenuItem>
+        { user ? loggedMenu() : unloggedMenu() }
       </Menu>
       <Router />
     </BrowserRouter>

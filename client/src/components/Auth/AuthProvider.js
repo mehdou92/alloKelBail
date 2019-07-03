@@ -31,6 +31,12 @@ class AuthProvider extends Component {
             this.setState({ user: token });
         }
     }
+
+    logout = () => {
+        sessionStorage.removeItem('token');
+        this.setState({user : null});
+    }
+
     render() {
         return (
             <AuthContext.Provider value={{ ...this.state, ...publicActions(this, actions) }}>

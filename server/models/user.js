@@ -35,6 +35,7 @@ UserSchema.pre('save', function(next) {
 });
 
 UserSchema.methods.register = function() {
+    console.log('user schema');
     return this.save();
 }
 

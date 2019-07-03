@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import SignIn from "../SignIn";
 import Register from '../Register';
+import sucessRegistered from '../SucessRegistered';
 
 const Router = () => (
     <>
@@ -12,6 +13,7 @@ const Router = () => (
             <Redirect to="/" />
         )} />
         <Route path="/register" exact component={Register} />
+        <Route path="/sucessRegistered" exact component={sucessRegistered} />
     </>
 );
 

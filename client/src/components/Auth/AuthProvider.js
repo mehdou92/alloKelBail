@@ -43,10 +43,10 @@ class AuthProvider extends Component {
         try {
             response = await register({firstname: firstname, lastname: lastname, email: email, password: password, newsletterAccepted: newsletterAccepted});
         } catch (e) {
-            console.log('Error :',  e);
+            console.log('Error Register:',  e);
         }
         if(response){
-            console.log('Response register :', response);
+            return true;
         }
     }
 

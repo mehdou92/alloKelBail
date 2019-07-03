@@ -1,7 +1,5 @@
 const register = async (params = {}) => {
 
-    console.log(params);
-
     let response = await fetch("http://localhost:3000/register",
         {
             method: "post",

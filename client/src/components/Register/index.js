@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -54,7 +54,9 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function SignUp() {
+export default function SignUp(props) {
+
+  let [confirmSignUp, setConfirmSignUp] = useState(false); 
 
   const { values, handleChange, handleChangeCheckbox, handleSubmit, errors } = useForm(handleRegister, validate);
   let { register } = useContext(AuthContext);
@@ -67,8 +69,9 @@ export default function SignUp() {
       if(!values.newsletterAccepted){
           values.newsletterAccepted = false;
       }
-      console.log('checkRegister : ', values);
-      register(values.firstName, values.lastName, values.email, values.password, values.newsletterAccepted);
+      if(register(values.firstName, values.lastName, values.email, values.password, values.newsletterAccepted)) {
+        setConfirmSignUp(true);
+      }
 
   }
 
@@ -76,6 +79,7 @@ export default function SignUp() {
 
   return (
     <Container component="main" maxWidth="xs">
+      {confirmSignUp ? props.history.push('/sucessRegistered') : ''}
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>

@@ -56,10 +56,10 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function SignIn() {
+export default function SignIn(props) {
 
     const { values, handleChange, handleSubmit, errors } = useForm(handleSignIn, validate);
-    let { login } = useContext(AuthContext);
+    let { user, login } = useContext(AuthContext);
 
     function handleSignIn() {
         checkCredidential(values);
@@ -73,6 +73,7 @@ export default function SignIn() {
 
     return (
         <Container component="main" maxWidth="xs">
+            {user ? props.history.push('/profile') : ''}
             <CssBaseline />
             <div className={classes.paper}>
                 <Avatar className={classes.avatar}>

@@ -56,7 +56,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function SignIn(props) {
+export default function SignIn() {
 
     const { values, handleChange, handleSubmit, errors } = useForm(handleSignIn, validate);
     let { login } = useContext(AuthContext);
@@ -102,12 +102,13 @@ export default function SignIn(props) {
                         required
                         fullWidth
                         name="password"
-                        label="Password"
+                        label={errors.password ? errors.password : "Password"}
                         type="password"
                         id="password"
                         autoComplete="current-password"
                         onChange={handleChange}
                         value={values.password || ''}
+                        error={errors.password ? true : false}
                     />
                     <FormControlLabel
                         control={<Checkbox value="remember" color="primary" />}

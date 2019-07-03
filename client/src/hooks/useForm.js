@@ -23,8 +23,14 @@ const useForm = (callback, validate) => {
     setValues(values => ({ ...values, [event.target.name]: event.target.value }));
   };
 
+  const handleChangeCheckbox = (event) => {
+    event.persist();
+    setValues(values => ({ ...values, [event.target.name]: event.target.checked }));
+  }
+
   return {
     handleChange,
+    handleChangeCheckbox,
     handleSubmit,
     values,
     errors,

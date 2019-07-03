@@ -17,7 +17,7 @@ const UserSchema = new mongoose.Schema({
     email: {type: String, required: true, unique: true, match: /.*/},
     password: {type: String, required: true},
     newsletterAccepted: {type: Boolean, required: true},
-    newsletterAcceptedDate: {type: Date, required: true},
+    newsletterAcceptedDate: {type: Date, default: Date.now, required: true},
     createdAt: Date
 });
 UserSchema.pre('validate', function(next) {

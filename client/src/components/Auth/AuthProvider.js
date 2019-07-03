@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect, Component } from 'react';
 import signIn from '../../api/authentication';
+import register from '../../api/register';
 import actions from './Actions';
 import publicActions from '../../helpers/public-actions';
 
@@ -35,6 +36,18 @@ class AuthProvider extends Component {
     logout = () => {
         sessionStorage.removeItem('token');
         this.setState({user : null});
+    }
+
+    register = async (firstname, lastname, email, password, newsletterAccepted) => {
+        let response;
+        try {
+            response = await register({firstname: firstname, lastname: lastname, email: email, password: password, newsletterAccepted: newsletterAccepted});
+        } catch (e) {
+            console.log('Error :',  e);
+        }
+        if(response){
+            console.log('Response register :', response);
+        }
     }
 
     render() {

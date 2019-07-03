@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import SignIn from "../SignIn";
+import Register from '../Register';
 
 const Router = () => (
     <>
@@ -10,7 +11,7 @@ const Router = () => (
         <Route path="/logout" render={() => (
             <Redirect to="/" />
         )} />
-        <Route path="/register" exact component={SignIn} />
+        <Route path="/register" exact component={Register} />
     </>
 );
 

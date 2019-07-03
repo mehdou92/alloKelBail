@@ -89,9 +89,7 @@ export default function PrimarySearchAppBar(props) {
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const { user, logout } = useContext(AuthContext);
-
-  console.log('User token :', user);
-
+  
   function handleProfileMenuOpen(event) {
     setAnchorEl(event.currentTarget);
   }

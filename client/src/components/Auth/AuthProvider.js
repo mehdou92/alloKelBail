@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect, Component } from 'react';
+import React, { createContext, Component } from 'react';
 import signIn from '../../api/authentication';
 import register from '../../api/register';
 import actions from './Actions';

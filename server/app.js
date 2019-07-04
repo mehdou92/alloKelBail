@@ -16,8 +16,8 @@ app.use(cors());
 app.use(bodyparser.json());
 app.use('/', securityRouter);
 app.use('/users', userRouter);
-app.use(verifyToken);
 app.use('/movies', movieRouter);
+app.use(verifyToken);
 
 app.listen(3000, () => {
     console.log('Listening');

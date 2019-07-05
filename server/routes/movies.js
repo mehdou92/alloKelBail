@@ -6,6 +6,11 @@ router.get('/', (req, res) => {
     Movie.find().then(data => res.json(data));
 });
 
+router.get('/:id', (req, res) => {
+    console.log('MOVIE BY ID : ',req.params.id);
+    Movie.findOne({ imdbID: req.params.id}).then(data => res.json(data));
+});
+
 router.post('/', (req, res) => {
     const movie = new Movie(req.body);
     movie.save()

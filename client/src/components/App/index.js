@@ -3,6 +3,9 @@ import Navbar from '../Navbar';
 import AuthProvider from '../Auth/AuthProvider';
 import Card from '../Card';
 import useFetchMovies from '../../hooks/useFetchMovies';
+import Footer from '../Footer';
+import Router from '../Router';
+import { BrowserRouter} from 'react-router-dom';
 
 function App() {
 
@@ -13,7 +16,7 @@ function App() {
       console.log(data);
       let tmpTab = [];
       data.forEach(element => {
-        tmpTab.push(<Card title={element.Title} plot={element.Plot} poster={element.Poster} imdbId={element.imdbId} />)
+        tmpTab.push(<Card title={element.Title} plot={element.Plot} poster={element.Poster} imdbId={element.imdbID} />)
       });
       return tmpTab;
     }
@@ -28,6 +31,7 @@ function App() {
         ) : (
           displayCardMovie(data)
         )}
+        <Footer />
     </AuthProvider>
 
   );

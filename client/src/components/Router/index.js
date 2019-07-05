@@ -4,6 +4,7 @@ import SignIn from "../SignIn";
 import Register from '../Register';
 import SucessRegistered from '../SucessRegistered';
 import Profile from '../Profile';
+import MovieCard from '../MovieCard';
 
 const Router = () => (
     <>
@@ -15,6 +16,7 @@ const Router = () => (
         )} />
         <Route path="/register" exact component={Register} />
         <Route path="/sucessRegistered" exact component={SucessRegistered} />
+        <Route path="/movieCard/:id" exact component={MovieCard} />
     </>
 );
 

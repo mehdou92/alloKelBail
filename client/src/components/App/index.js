@@ -4,12 +4,10 @@ import AuthProvider from '../Auth/AuthProvider';
 import Card from '../Card';
 import useFetchMovies from '../../hooks/useFetchMovies';
 import Footer from '../Footer';
-import Router from '../Router';
-import { BrowserRouter} from 'react-router-dom';
 
 function App() {
 
-  const [{ data, isLoading, isError }, doFetch] = useFetchMovies();
+  const [{ data, isLoading, isError }, doFetch] = useFetchMovies('http://localhost:3000/movies');
 
   const displayCardMovie = (data) => {
     if(!data.hits){

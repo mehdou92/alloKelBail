@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link, BrowserRouter, Redirect } from 'react-router-dom';
+import { Link, BrowserRouter } from 'react-router-dom';
 import Router from '../Router';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -11,7 +11,6 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '../IconButtons';
 import { AuthContext } from '../Auth/AuthProvider';
-import MovieCard from '../MovieCard';
 
 const useStyles = makeStyles({
   card: {
@@ -32,7 +31,6 @@ export default function ImgMediaCard(props) {
 
   return (
     <Card className={classes.card}>
-      {console.log(props.imdbId)}
       <CardActionArea>
         <CardMedia
           component="img"

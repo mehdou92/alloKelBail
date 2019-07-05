@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 
-const useFetchMovies = () => {
+const useFetchMovies = (link) => {
     const [data, setData] = useState({ hits: [] });
-    const [url, setUrl] = useState(
-        'http://localhost:3000/movies',
-    );
+    // const [url, setUrl] = useState(
+    //     'http://localhost:3000/movies',
+    // );
+    const [url, setUrl] = useState(link);
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);
 
@@ -14,7 +15,7 @@ const useFetchMovies = () => {
             setIsLoading(true);
 
             try {
-                const result = await fetch("http://localhost:3000/movies",
+                const result = await fetch(url,
                     {
                         method: "GET",
                         headers: {

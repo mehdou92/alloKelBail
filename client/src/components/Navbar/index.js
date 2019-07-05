@@ -16,6 +16,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import HomeIcon from '@material-ui/icons/Home'
 import { AuthContext } from '../Auth/AuthProvider';
 
 const useStyles = makeStyles(theme => ({
@@ -89,7 +90,7 @@ export default function PrimarySearchAppBar(props) {
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const { user, logout } = useContext(AuthContext);
-  
+
   function handleProfileMenuOpen(event) {
     setAnchorEl(event.currentTarget);
   }
@@ -107,7 +108,7 @@ export default function PrimarySearchAppBar(props) {
     setMobileMoreAnchorEl(event.currentTarget);
   }
 
-  function handleLogout(){
+  function handleLogout() {
     handleMenuClose();
     logout();
   }
@@ -115,12 +116,12 @@ export default function PrimarySearchAppBar(props) {
   const loggedMenu = () => {
     return [
       <>
-      <Link to="/profile">
-        <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      </Link>
-      <Link to="/logout" >
-        <MenuItem onClick={handleLogout}>Logout</MenuItem>
-      </Link>
+        <Link to="/profile">
+          <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+        </Link>
+        <Link to="/logout" >
+          <MenuItem onClick={handleLogout}>Logout</MenuItem>
+        </Link>
       </>
     ]
   };
@@ -128,12 +129,12 @@ export default function PrimarySearchAppBar(props) {
   const unloggedMenu = () => {
     return [
       <>
-      <Link to="/login" >
-        <MenuItem onClick={handleMenuClose}>Sign In</MenuItem>
-      </Link>
-      <Link to="/register" >
-        <MenuItem onClick={handleMenuClose}>Register</MenuItem>
-      </Link>
+        <Link to="/login" >
+          <MenuItem onClick={handleMenuClose}>Sign In</MenuItem>
+        </Link>
+        <Link to="/register" >
+          <MenuItem onClick={handleMenuClose}>Register</MenuItem>
+        </Link>
       </>
     ]
   }
@@ -141,17 +142,17 @@ export default function PrimarySearchAppBar(props) {
   const menuId = 'primary-search-account-menu';
 
   const renderMenu = (
-      <Menu
-        anchorEl={anchorEl}
-        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-        id={menuId}
-        keepMounted
-        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-        open={isMenuOpen}
-        onClose={handleMenuClose}
-      >
-        { user ? loggedMenu() : unloggedMenu() }
-      </Menu>
+    <Menu
+      anchorEl={anchorEl}
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      id={menuId}
+      keepMounted
+      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      open={isMenuOpen}
+      onClose={handleMenuClose}
+    >
+      {user ? loggedMenu() : unloggedMenu()}
+    </Menu>
   );
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
@@ -206,6 +207,11 @@ export default function PrimarySearchAppBar(props) {
             aria-label="Open drawer"
           >
             <MenuIcon />
+            <Link to="/">
+            <IconButton className={classes.button} aria-label="Home">
+              <HomeIcon />
+            </IconButton>
+            </Link>
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
             Material-UI

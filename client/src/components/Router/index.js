@@ -9,7 +9,6 @@ import ListMovies from '../ListMovies';
 
 const Router = () => (
     <>
-        {/* <Route path="/" exact component={ListMovie} /> */}
         <Route path="/" exact component={ListMovies} />
         <Route path="/login" exact component={SignIn} />
         <Route path="/profile" exact component={Profile} />
@@ -18,7 +17,7 @@ const Router = () => (
         )} />
         <Route path="/register" exact component={Register} />
         <Route path="/sucessRegistered" exact component={SucessRegistered} />
-        {/* <Route path="/movieCard/:id" exact component={MovieCard} /> */}
+        <Route path="/movieCard/:id" exact component={MovieCard} />
     </>
 );
 

@@ -25,7 +25,7 @@ export default function MovieCard(props) {
   const displayDataMovie = (data) => {
     if(!data.hits){
       console.log(data);
-      return <span>{data.Title} {data.Year} {data.Genre}</span>
+      return <h1>{data.Title} {data.Year} {data.Genre}</h1>
     }
   }
 

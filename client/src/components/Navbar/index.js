@@ -141,7 +141,6 @@ export default function PrimarySearchAppBar(props) {
   const menuId = 'primary-search-account-menu';
 
   const renderMenu = (
-    <BrowserRouter>
       <Menu
         anchorEl={anchorEl}
         anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
@@ -153,8 +152,6 @@ export default function PrimarySearchAppBar(props) {
       >
         { user ? loggedMenu() : unloggedMenu() }
       </Menu>
-      <Router />
-    </BrowserRouter>
   );
 
   const mobileMenuId = 'primary-search-account-menu-mobile';

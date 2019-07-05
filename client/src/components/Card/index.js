@@ -49,14 +49,11 @@ export default function ImgMediaCard(props) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <BrowserRouter>
           <Link to={`/movieCard/${props.imdbId}`} >
             <Button size="small" color="primary">
               See more
             </Button>
           </Link >
-          <Router />
-        </BrowserRouter>
         {displayButton()}
       </CardActions>
     </Card>

@@ -6,12 +6,18 @@ const router = express.Router();
 
 router.post('/login_check', (req, res) => {
   //console.log(User.login(req.body.email,req.body.password));
-  User.login(req.body.email,req.body.password).then(() =>
+
+  User.login(req.body.email,req.body.password).then(async () =>
   {
+
+    const user = await User.getUser(req.body.email);
+    console.log(user);
+
     const token = createToken({
-      firstName:'user', //change for firstname lastname of the real user
-      lastName:'user',
+      firstName:user.firstName, //change for firstname lastname of the real user
+      lastName:user.lastName,
     });
+    console.log(token);
     res.status(201).send({token});
   })
     .catch(error => res.status(400).json({error : 'Invalids Credentials'}));

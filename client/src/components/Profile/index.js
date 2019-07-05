@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function Profile() {
+export default function Profile(props) {
   const classes = useStyles();
 
   return (
@@ -44,17 +44,7 @@ export default function Profile() {
         <Typography variant="h2" component="h1" gutterBottom>
           PROFILE
         </Typography>
-        <Typography variant="h5" component="h2" gutterBottom>
-          {'MY PROFILE'}
-        </Typography>
-        <Typography variant="body1">Sticky footer placeholder.</Typography>
       </Container>
-      <footer className={classes.footer}>
-        <Container maxWidth="sm">
-          <Typography variant="body1">My sticky footer can be found here.</Typography>
-          <MadeWithLove />
-        </Container>
-      </footer>
     </div>
   );
 }

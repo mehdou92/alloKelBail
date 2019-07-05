@@ -48,6 +48,24 @@ UserSchema.statics.login = function(email, password) {
     });
 }
 
+UserSchema.statics.getUser = async function(email){
+
+    if(!email){
+        return ("No email found for getUser");
+    }
+    try {
+        const user = await User.findOne({ email: email});
+        return user;
+    }
+    catch (err) {
+        return err;
+    }
+}
+
+UserSchema.statics.decode = function(token) {
+
+}
+
 const User = db.model('User', UserSchema);
 
 module.exports = User;

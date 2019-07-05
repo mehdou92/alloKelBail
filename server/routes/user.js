@@ -6,6 +6,11 @@ router.get('/', (req, res) => {
     User.find().then(data => res.json(data));
 })
 
+router.get('/info', (req, res) => {
+    console.log('info user');
+    User.findOne({ email : req.body.email }).then(data => res.json(data));
+})
+
 
 router.post('/', (req, res) => {
     const user = new User(req.body);

@@ -14,6 +14,7 @@ router.get('/id/:id', (req, res) => {
 
 router.get('/search/', (req, res) => {
     console.log('get movie by search : ', req.query.q);
+    console.log('query ', req.query);
     Movie.search(
     {query_string: {query: req.query.q}},
     {hydrate: true},
@@ -28,6 +29,28 @@ router.get('/search/', (req, res) => {
       // results here
 
   });
+
+//   {
+//     "query": {
+//       "query_string": {
+//         "fields": ["Title", "Year", "Genre"],
+//         "query": "Avengers AND 2018 AND Action"
+//       }
+//     }
+//   }
+
+// GET _search
+// {
+//     "query": {
+//         "range" : {
+//             "age" : {
+//                 "gte" : 10,
+//                 "lte" : 20,
+//                 "boost" : 2.0
+//             }
+//         }
+//     }
+// }
 });
 
 router.post('/', (req, res) => {

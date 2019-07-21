@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Link}  from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import queryString from 'query-string';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -7,6 +7,7 @@ import InputBase from '@material-ui/core/InputBase';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
+import TextField from '@material-ui/core/TextField';
 
 const useStyles = makeStyles({
   root: {
@@ -34,6 +35,10 @@ export default function SearchBar(props) {
 
   const [query, setQuery] = useState('');
   const [errors, setErrors] = useState([]);
+  const [title, setTitle] = useState('');
+  const [year, setYear] = useState('');
+  const [genre, setGenre] = useState('');
+  const [rating, setRating] = useState(0);
 
   const handleSubmit = () => {
     let err = [];
@@ -58,29 +63,77 @@ export default function SearchBar(props) {
 
 
   return (
-    <Paper className={classes.root}>
-      <IconButton className={classes.iconButton} aria-label="Menu">
-      </IconButton>
-      <InputBase
-        className={classes.input}
-        placeholder="Search Movies"
-        inputProps={{ 'aria-label': 'Search Movies' }}
-        onChange={e => setQuery(e.target.value)}
-        name="query"
-        value={query}
+    <>
+      <Paper className={classes.root}>
+        <IconButton className={classes.iconButton} aria-label="Menu">
+        </IconButton>
+        <InputBase
+          className={classes.input}
+          placeholder="Search Movies"
+          inputProps={{ 'aria-label': 'Search Movies' }}
+          onChange={e => setQuery(e.target.value)}
+          name="query"
+          value={query}
+        />
+
+        <Divider className={classes.divider} />
+        <Link to={{
+          pathname: '/displaySearch',
+          state: {
+            query: query
+          }
+        }}>
+          <IconButton color="primary" className={classes.iconButton} aria-label="Directions">
+            <SearchIcon />
+          </IconButton>
+        </ Link>
+      </Paper>
+      <TextField
+        id="outlined-with-placeholder"
+        label="Movie genre"
+        placeholder="Movie genre"
+        className={classes.textField}
+        margin="normal"
+        variant="outlined"
+        name="genre"
+        value={genre}
+      />
+      <TextField
+        id="outlined-with-placeholder"
+        label="Movie year"
+        placeholder="Movie year"
+        className={classes.textField}
+        margin="normal"
+        variant="outlined"
+        name="year"
+        value={year}
       />
 
-      <Divider className={classes.divider} />
-      <Link to={{
-        pathname: '/displaySearch',
-        state: {
-          query: query
-        }
-      }}>
-        <IconButton color="primary" className={classes.iconButton} aria-label="Directions">
-          <SearchIcon />
-        </IconButton>
-      </ Link>
-    </Paper>
+      <TextField
+        id="outlined-number"
+        label="Movie rating"
+        name="rating"
+        value={rating}
+        onChange={handleChange('age')}
+        type="number"
+        className={classes.textField}
+        InputLabelProps={{
+          shrink: true,
+        }}
+        margin="normal"
+        variant="outlined"
+      />
+
+      <TextField
+        id="outlined-with-placeholder"
+        label="Movie title"
+        placeholder="Movie title"
+        className={classes.textField}
+        margin="normal"
+        variant="outlined"
+        name="title"
+        value={title}
+      />
+    </>
   );
 }

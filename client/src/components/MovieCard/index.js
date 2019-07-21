@@ -49,7 +49,7 @@ export default function MovieCard(props) {
 
   const [idMovie, setIdMovie] = useState(props.match.params)
 
-  const [{ data, isLoading, isError}, doFetch ] = useFetchMovies(`http://localhost:3000/movies/${idMovie.id}`);
+  const [{ data, isLoading, isError}, doFetch ] = useFetchMovies(`http://localhost:3000/movies/id/${idMovie.id}`);
 
   const displayDataMovie = (data) => {
     if(!data.hits){

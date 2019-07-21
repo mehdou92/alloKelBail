@@ -31,14 +31,15 @@ stream.on('error', function (err) {
 
 // query test elk 
 
-Movie.search(
-    {query_string: {query: '2018'}},
-    {hydrate: true},
-    function(err, results) {
-        console.log('result ', results.hits);
-        console.log('ERR ', err);
-      // results here
-  });
+// Movie.search(
+//     {query_string: {query: '2018'}},
+//     {hydrate: true},
+//     function(err, results) {
+//         console.log('result ', results.hits);
+//         console.log('ERR ', err);
+//       // results here
+
+//   });
 
 const express = require('express');
 const movieRouter = require('./routes/movies');

@@ -7,6 +7,7 @@ import Profile from '../Profile';
 import MovieCard from '../MovieCard';
 import ListMovies from '../ListMovies';
 import SearchMovie from '../SearchMovie';
+import DisplaySearch from "../DisplaySearch";
 
 const Router = () => (
     <>
@@ -20,6 +21,7 @@ const Router = () => (
         <Route path="/sucessRegistered" exact component={SucessRegistered} />
         <Route path="/movieCard/:id" exact component={MovieCard} />
         <Route path="/search" exact component={SearchMovie} />
+        <Route path="/displaySearch" exact component={DisplaySearch} />
     </>
 );
 

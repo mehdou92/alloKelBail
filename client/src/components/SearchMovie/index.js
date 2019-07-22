@@ -38,7 +38,7 @@ export default function SearchBar(props) {
   const [title, setTitle] = useState('');
   const [year, setYear] = useState('');
   const [genre, setGenre] = useState('');
-  const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState('');
 
   const handleSubmit = () => {
     let err = [];
@@ -80,7 +80,11 @@ export default function SearchBar(props) {
         <Link to={{
           pathname: '/displaySearch',
           state: {
-            query: query
+            query: query,
+            genre: genre,
+            rating: rating,
+            year: year,
+            title: title
           }
         }}>
           <IconButton color="primary" className={classes.iconButton} aria-label="Directions">
@@ -97,6 +101,7 @@ export default function SearchBar(props) {
         variant="outlined"
         name="genre"
         value={genre}
+        onChange={e => setGenre(e.target.value)}
       />
       <TextField
         id="outlined-with-placeholder"
@@ -107,22 +112,21 @@ export default function SearchBar(props) {
         variant="outlined"
         name="year"
         value={year}
+        onChange={e => setYear(e.target.value)}
       />
 
       <TextField
-        id="outlined-number"
-        label="Movie rating"
-        name="rating"
-        value={rating}
-        onChange={handleChange('age')}
-        type="number"
+        id="outlined-with-placeholder"
+        label=" Movie rating superior to"
+        placeholder="Movie rating superior to"
         className={classes.textField}
-        InputLabelProps={{
-          shrink: true,
-        }}
         margin="normal"
         variant="outlined"
+        name="rating"
+        value={rating}
+        onChange={e => setRating(e.target.value)}
       />
+
 
       <TextField
         id="outlined-with-placeholder"
@@ -133,6 +137,7 @@ export default function SearchBar(props) {
         variant="outlined"
         name="title"
         value={title}
+        onChange={e => setTitle(e.target.value)}
       />
     </>
   );

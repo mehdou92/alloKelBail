@@ -14,6 +14,8 @@ const useFetchMovies = (link) => {
             setIsError(false);
             setIsLoading(true);
 
+            console.log('use fetch movie ', url);
+
             try {
                 const result = await fetch(url,
                     {

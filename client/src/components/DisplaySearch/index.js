@@ -12,6 +12,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import DirectionsIcon from '@material-ui/icons/Directions';
 import SearchMovie from '../SearchMovie';
 import Typography from '@material-ui/core/Typography';
+import axios from 'axios';
 
 
 import useFetchMovies from '../../hooks/useFetchMovies';
@@ -42,20 +43,42 @@ export default function DisplaySearch(props) {
   const classes = useStyles();
 
   const [query, setQuery] = useState(null);
+  const [title, setTitle] = useState(null);
+  const [year, setYear] = useState(null);
+  const [genre, setGenre] = useState(null);
+  const [rating, setRating] = useState(null);
   const [hits, setHits] = useState(null);
   const [listMovies, setListMovies] = useState(null);
+  const [url, setUrl] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [data, setData] = useState(null);
 
   const [errors, setErrors] = useState([]);
 
-  const [{ data, isLoading, isError }, doFetch] = useFetchMovies(`http://localhost:3000/movies/search?q=${props.location.state.query}   `);
+  // const [{ data, isLoading, isError }, doFetch] = useFetchMovies(`http://localhost:3000/movies/search?q=${props.location.state.query}`);
+
+
+  // var [{ data, isLoading, isError }, doFetch] = useFetchMovies(url);
 
 
   const displayDataSearch = (data) => {
-    console.log(query.query);
 
     console.log(data, 'result fetch');
-    console.log(data.total);
 
+  }
+
+  const constructQuery = () => {
+    if(query) {
+      console.log('query full text not null');
+      console.log('query construct', query);
+      setUrl(`http://localhost:3000/movies/search?q=${query}`);
+    }
+    if(year && genre && rating && title && url) {
+      console.log('QUERY ARRGSSSSSSSSSSSSS');
+      setUrl(`http://localhost:3000/movies/search?year=${year}&genre=${genre}&rating=${rating}&title=${title}`);
+      console.log(url);
+      console.log('year', year);
+    }
   }
 
   const renderSearch = (list) => {
@@ -85,10 +108,33 @@ export default function DisplaySearch(props) {
   }
 
   useEffect(() => {
-    setQuery(props.location.state);
-    setHits(data.total);
-    setListMovies(data.hits);
-  }, [query])
+    setQuery(props.location.state.query);
+    setGenre(props.location.state.genre);
+    setRating(props.location.state.rating);
+    setTitle(props.location.state.title);
+    setYear(props.location.state.year);
+    // setHits(data.total);
+    // setListMovies(data.hits);
+
+    
+    constructQuery();
+
+
+    const fetchData = async () => {
+      setIsLoading(true);
+
+    
+        console.log("url axios", url);
+        const result = await axios.get(url);
+
+        console.log(result.data);
+  
+        setData(result.data);
+        setIsLoading(false);
+    };
+
+    fetchData();
+  }, [query, url, rating])
 
   return (
     <>
@@ -96,7 +142,9 @@ export default function DisplaySearch(props) {
       {
         (query) &&
         <>
-          {doFetch}
+          {console.log("url", url)}
+          {/* {doFetch} */}
+          
 
           {
             isLoading ? (
@@ -106,7 +154,7 @@ export default function DisplaySearch(props) {
                   {displayDataSearch(data)}
                   <Container maxWidth="xl">
                     <Typography variant="h3" gutterBottom>
-                      Result of your search for : " {query.query} "
+                      Result of your search for : " {query} "
                     </Typography>
                     <Link to="/search" >
                       <Button variant="contained" color="primary" className={classes.button}>

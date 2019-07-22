@@ -73,7 +73,7 @@ export default function DisplaySearch(props) {
       console.log('query construct', query);
       setUrl(`http://localhost:3000/movies/search?q=${query}`);
     }
-    if(year && genre && rating && title && url) {
+    if(year && genre && rating && title) {
       console.log('QUERY ARRGSSSSSSSSSSSSS');
       setUrl(`http://localhost:3000/movies/search?year=${year}&genre=${genre}&rating=${rating}&title=${title}`);
       console.log(url);
@@ -83,7 +83,16 @@ export default function DisplaySearch(props) {
 
   const renderSearch = (list) => {
 
+    console.log('LIST', list.lenght);
+    console.log('LIST ', list[0]);
+
     let arrayRender = [];
+
+    if(list.lenght === undefined) {
+      console.log('is undefined');
+      
+
+    }
 
     list.forEach(function (elem) {
       console.log(elem);
@@ -116,6 +125,8 @@ export default function DisplaySearch(props) {
     // setHits(data.total);
     // setListMovies(data.hits);
 
+    console.log('use effect');
+
     
     constructQuery();
 
@@ -127,7 +138,7 @@ export default function DisplaySearch(props) {
         console.log("url axios", url);
         const result = await axios.get(url);
 
-        console.log(result.data);
+        console.log('result data ', result.data);
   
         setData(result.data);
         setIsLoading(false);
@@ -140,7 +151,7 @@ export default function DisplaySearch(props) {
     <>
 
       {
-        (query) &&
+        (query || url) &&
         <>
           {console.log("url", url)}
           {/* {doFetch} */}
@@ -154,7 +165,7 @@ export default function DisplaySearch(props) {
                   {displayDataSearch(data)}
                   <Container maxWidth="xl">
                     <Typography variant="h3" gutterBottom>
-                      Result of your search for : " {query} "
+                      Result of your search for : " {query} {rating ? <> Titre : {title}, Genre {genre}, Year : {year} , Rating superior of : {rating} </> : ''} "
                     </Typography>
                     <Link to="/search" >
                       <Button variant="contained" color="primary" className={classes.button}>

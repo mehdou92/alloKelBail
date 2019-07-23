@@ -8,8 +8,15 @@ router.get('/', (req, res) => {
 });
 
 router.get('/id/:id', (req, res) => {
-    console.log('MOVIE BY ID : ', req.params.id);
-    Movie.findOne({ imdbID: req.params.id }).then(data => res.json(data));
+    Movie.findOne({ imdbID: req.params.id })
+        .then(data => {
+            if (data === null) {
+                res.status(400).json(`No movie find for the id : ${req.params.id}`);
+            } else {
+                res.status(200).json(data);
+            }
+        })
+        .catch(error => res.status(500).json(error));
 });
 
 router.post('/', (req, res) => {
@@ -28,11 +35,16 @@ router.post('/', (req, res) => {
 });
 
 router.get('/:id/comments', (req, res) => {
-    console.log('MOVIE BY ID : ', req.params.id);
-    Comment.find({ MovieId: req.params.id }).then(data => {
-        console.log('data : ', data);
-        res.json(data)
-    });
+    console.log('Movie id comments : ', req.params.id);
+    Comment.find({ MovieId: req.params.id })
+        .then(data => {
+            if (data.length) {
+                res.status(200).json(data);
+            } else {
+                res.status(404).json('No comments find for the movie');
+            }
+        })
+        .catch(error => res.status(500).json(error));
 });
 
 router.post('/:id/comments', (req, res) => {

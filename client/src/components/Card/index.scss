@@ -1,0 +1,51 @@
+.info-card {
+  position: absolute;
+  left: 3px;
+  top: 20px;
+  z-index: 4;
+  font-size: 0;
+}
+
+.info-year {
+  padding: 3px 6px;
+  color: #fff;
+  display: block;
+  font-size: 12px;
+  margin-bottom: 4px;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+  background: rgba(155,89,182,0.7);
+}
+
+.info-genre {
+  padding: 3px 6px;
+  color: #fff;
+  display: block;
+  font-size: 12px;
+  margin-bottom: 4px;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+  background: rgba(2,176,228,0.7);
+}
+
+.info-timer {
+  padding: 3px 6px;
+  color: #fff;
+  display: block;
+  font-size: 12px;
+  margin-bottom: 4px;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+  background: rgba(252,26,63,0.6);
+}
+
+.info-rate {
+  padding: 3px 6px;
+  color: #fff;
+  display: block;
+  font-size: 12px;
+  margin-bottom: 4px;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+  background: rgba(255,105,7,0.7);
+}

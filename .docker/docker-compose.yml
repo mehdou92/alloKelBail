@@ -44,31 +44,31 @@ services:
     ports:
       - 127.0.0.1:3001:3000
 
-  elasticsearch:
-      image: docker.elastic.co/elasticsearch/elasticsearch:6.7.1
-      environment:
-        - cluster.name=docker-cluster
-        - bootstrap.memory_lock=true
-        - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-        - xpack.security.enabled=false
-        - xpack.monitoring.enabled=false
-        - xpack.ml.enabled=false
-        - xpack.graph.enabled=false
-        - xpack.watcher.enabled=false
-        - discovery.zen.minimum_master_nodes=1
-        - discovery.type=single-node
-      ulimits:
-        memlock:
-          soft: -1
-          hard: -1
-      volumes:
-        - /usr/share/elasticsearch/data
-      ports:
-        - 9200:9200
+  # elasticsearch:
+  #     image: docker.elastic.co/elasticsearch/elasticsearch:6.7.1
+  #     environment:
+  #       - cluster.name=docker-cluster
+  #       - bootstrap.memory_lock=true
+  #       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+  #       - xpack.security.enabled=false
+  #       - xpack.monitoring.enabled=false
+  #       - xpack.ml.enabled=false
+  #       - xpack.graph.enabled=false
+  #       - xpack.watcher.enabled=false
+  #       - discovery.zen.minimum_master_nodes=1
+  #       - discovery.type=single-node
+  #     ulimits:
+  #       memlock:
+  #         soft: -1
+  #         hard: -1
+  #     volumes:
+  #       - /usr/share/elasticsearch/data
+  #     ports:
+  #       - 9200:9200
     
-  kibana:
-      image: kibana:6.7.1
-      ports:
-        - 5601:5601
-      depends_on:
-        - elasticsearch
+  # kibana:
+  #     image: kibana:6.7.1
+  #     ports:
+  #       - 5601:5601
+  #     depends_on:
+  #       - elasticsearch

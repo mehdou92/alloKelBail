@@ -62,13 +62,17 @@ export default function Comments(props) {
     const [{ data, isLoading, isError}, doFetch ] = useFetchMovies(`http://localhost:3000/movies/${props.idMovie.id}/comments`);
 
     const displayComments = (data) => {
-        if (!data.hits) {
-            console.warn('data : ', data);
-            let tmpTab = [];
-            data.forEach(element => {
-                tmpTab.push(<Paper className={classes.comment}><Typography component="h1" variant="h5">{element.Text}</Typography></Paper>)
-            });
-            return tmpTab;
+        if (data.hits || data) {
+            // console.warn('data : ', data.hits.length);
+            if(data.hits && !data.hits.length > 0) {
+                return [];
+            } else if(data.length > 0 && data[0]._id) {
+                let tmpTab = [];
+                data.forEach(element => {
+                    tmpTab.push(<Paper className={classes.comment}><Typography component="h1" variant="h5">{element.Text}</Typography></Paper>)
+                });
+                return tmpTab;
+            }
         }
     };
 

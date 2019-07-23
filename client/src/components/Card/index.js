@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { Link, BrowserRouter } from 'react-router-dom';
 import Router from '../Router';
-import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
@@ -11,12 +10,24 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '../IconButtons';
 import { AuthContext } from '../Auth/AuthProvider';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles({
-  card: {
-    maxWidth: 345,
-  },
-});
+
+const useStyles = makeStyles(theme => ({
+    root: {
+        flexGrow: 1,
+    },
+    paper: {
+        padding: theme.spacing(2),
+        textAlign: 'center',
+        color: theme.palette.text.secondary,
+    },
+    card: {
+        maxWidth: 345,
+    },
+}));
 
 export default function ImgMediaCard(props) {
   const classes = useStyles();
@@ -30,32 +41,35 @@ export default function ImgMediaCard(props) {
   }
 
   return (
-    <Card className={classes.card}>
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          alt={props.title}
-          height="140"
-          image={props.poster}
-          title={props.title}
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            {props.title}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p" noWrap={true}>
-            {props.plot}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
-          <Link to={`/movieCard/${props.imdbId}`} >
-            <Button size="small" color="primary">
-              See more
-            </Button>
-          </Link >
-        {displayButton()}
-      </CardActions>
-    </Card>
+              <Grid item xs={3}>
+                  <Paper className={classes.paper}><Card className={classes.card}>
+                      <CardActionArea>
+                          <CardMedia
+                              component="img"
+                              alt={props.title}
+                              height="140"
+                              image={props.poster}
+                              title={props.title}
+                          />
+                          <CardContent>
+                              <Typography gutterBottom variant="h5" component="h2">
+                                  {props.title}
+                              </Typography>
+                              <Typography variant="body2" color="textSecondary" component="p" noWrap={true}>
+                                  {props.plot}
+                              </Typography>
+                          </CardContent>
+                      </CardActionArea>
+                      <CardActions>
+                          <Link to={`/movieCard/${props.imdbId}`} >
+                              <Button size="small" color="primary">
+                                  See more
+                              </Button>
+                          </Link >
+                          {displayButton()}
+                      </CardActions>
+                  </Card></Paper>
+              </Grid>
+
   );
 }

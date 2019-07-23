@@ -19,6 +19,11 @@ const MovieSchema = new mongoose.Schema({
     imdbVotes: String,
 });
 
+/*MovieSchema.plugin(mongoostatic, {
+    "host": "elasticsearch",
+    "port": 9200
+});*/
+
 MovieSchema.pre('save', function (next) {
     console.log('Saving...' + this.title);
     next();

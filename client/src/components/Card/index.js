@@ -40,7 +40,7 @@ export default function ImgMediaCard(props) {
       return tmp;
     }
   }
-    console.log(props);
+    console.log("poster : ", props.poster);
   return (
               <Grid item xs={3}>
                   <Paper className={classes.paper}><Card className={classes.card}>

@@ -1,5 +1,6 @@
 const express = require('express');
 const createToken = require('../lib/auth.js').createToken;
+const verifyToken = require('../lib/auth.js').verifyToken;
 const User = require('../models/user');
 
 const router = express.Router();
@@ -11,13 +12,10 @@ router.post('/login_check', (req, res) => {
   {
 
     const user = await User.getUser(req.body.email);
-    console.log(user);
 
     const token = createToken({
-      firstName:user.firstName, //change for firstname lastname of the real user
-      lastName:user.lastName,
+      userId: user._id, //change for firstname lastname of the real user
     });
-    console.log(token);
     res.status(201).send({token});
   })
     .catch(error => res.status(400).json({error : 'Invalids Credentials'}));

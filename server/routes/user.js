@@ -8,7 +8,14 @@ router.get('/', (req, res) => {
 
 router.get('/info', (req, res) => {
     console.log('info user');
-    User.findOne({ email : req.body.email }).then(data => res.json(data));
+    User.findOne({ _id : req.body.userId })
+        .then(data => {
+            if(data) {
+                res.status(200).json(data);
+            } else {
+                res.status(404).json('No user with this id');
+            }
+        });
 })
 
 

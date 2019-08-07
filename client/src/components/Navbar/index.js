@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { BrowserRouter, Link } from "react-router-dom";
+import Router from '../Router';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -14,6 +16,9 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import HomeIcon from '@material-ui/icons/Home';
+import { AuthContext } from '../Auth/AuthProvider';
+import TableCell from '@material-ui/core/TableCell';
 
 const useStyles = makeStyles(theme => ({
   grow: {
@@ -77,13 +82,15 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function PrimarySearchAppBar() {
+export default function PrimarySearchAppBar(props) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+  const { user, logout } = useContext(AuthContext);
 
   function handleProfileMenuOpen(event) {
     setAnchorEl(event.currentTarget);
@@ -102,7 +109,39 @@ export default function PrimarySearchAppBar() {
     setMobileMoreAnchorEl(event.currentTarget);
   }
 
+  function handleLogout() {
+    handleMenuClose();
+    logout();
+  }
+
+  const loggedMenu = () => {
+    return [
+      <>
+        <Link to="/profile">
+          <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+        </Link>
+        <Link to="/logout" >
+          <MenuItem onClick={handleLogout}>Logout</MenuItem>
+        </Link>
+      </>
+    ]
+  };
+
+  const unloggedMenu = () => {
+    return [
+      <>
+        <Link to="/login" >
+          <MenuItem onClick={handleMenuClose}>Sign In</MenuItem>
+        </Link>
+        <Link to="/register" >
+          <MenuItem onClick={handleMenuClose}>Register</MenuItem>
+        </Link>
+      </>
+    ]
+  }
+
   const menuId = 'primary-search-account-menu';
+
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
@@ -113,8 +152,7 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      {user ? loggedMenu() : unloggedMenu()}
     </Menu>
   );
 
@@ -170,35 +208,24 @@ export default function PrimarySearchAppBar() {
             aria-label="Open drawer"
           >
             <MenuIcon />
+            <Link to="/">
+            <IconButton className={classes.button} aria-label="Home">
+              <HomeIcon />
+            </IconButton>
+            </Link>
           </IconButton>
-          <Typography className={classes.title} variant="h6" noWrap>
-            Material-UI
+          <Typography variant="h4" className={classes.title}>
+              AlloKelBail
           </Typography>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'Search' }}
-            />
-          </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <IconButton aria-label="Show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <MailIcon />
+            <Link to='/search'>
+            <IconButton aria-label="Search" color="inherit">
+              <Badge color="secondary">
+                <SearchIcon />
               </Badge>
             </IconButton>
-            <IconButton aria-label="Show 17 new notifications" color="inherit">
-              <Badge badgeContent={17} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
+            </Link>
             <IconButton
               edge="end"
               aria-label="Account of current user"

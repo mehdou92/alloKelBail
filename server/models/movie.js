@@ -1,26 +1,45 @@
 const db = require('../lib/db');
 const mongoose = require('mongoose');
+const mongoostatic = require('mongoosastic');
 
 const MovieSchema = new mongoose.Schema({
-    title: String,
-    createdAt: Date,
-    year: {
-        type: Number,
-        min: 1896
+    Title: String,
+    Year: String,
+    Released: String,
+    Runtime: String,
+    Genre: String,
+    Plot: String,
+    Language: String,
+    Poster: String,
+    Ratings: {
+        Source: String,
+        Value: String
     },
-    category: {
-        type: String,
-        enum: ['Drama', 'SF', 'Comedy', 'Action']
-    }
+    imdbRating: String,
+    imdbVotes: String,
 });
 
-MovieSchema.pre('save', function(next) {
+/*MovieSchema.plugin(mongoostatic, {
+    "host": "elasticsearch",
+    "port": 9200
+});*/
+
+MovieSchema.pre('save', function (next) {
     console.log('Saving...' + this.title);
     next();
 });
 
-MovieSchema.post('save', function(doc) {
+MovieSchema.post('save', function (doc) {
     console.log(doc.title + ' is saved!');
 });
 
-module.exports = db.model('Movie', MovieSchema); //movies
+// elk search
+
+// MovieSchema.plugin(mongoostatic, {
+//     "host": "elasticsearch",
+//     "port": 9200
+// });
+
+const Movie = db.model('Movie', MovieSchema);
+
+module.exports = Movie; //movies

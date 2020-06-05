@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import queryString from 'query-string';
 import { makeStyles } from '@material-ui/core/styles';
@@ -34,32 +34,6 @@ export default function SearchBar(props) {
   const classes = useStyles();
 
   const [query, setQuery] = useState('');
-  const [errors, setErrors] = useState([]);
-  const [title, setTitle] = useState('');
-  const [year, setYear] = useState('');
-  const [genre, setGenre] = useState('');
-  const [rating, setRating] = useState('');
-
-  const handleSubmit = () => {
-    let err = [];
-    console.log('handleSubmit');
-    console.log('query ', query);
-
-    if (!query) {
-      err.push('empty query');
-    }
-    setErrors(err);
-    if (err.length === 0) {
-      console.log('no error form');
-
-      setQuery(queryString.parse(props.location.search));
-      console.log(query.q);
-      console.log(props.location.search);
-
-    } else {
-      setErrors(err);
-    }
-  }
 
 
   return (
@@ -78,13 +52,9 @@ export default function SearchBar(props) {
 
         <Divider className={classes.divider} />
         <Link to={{
-          pathname: '/displaySearch',
+          pathname: '/search-result',
           state: {
-            query: query,
-            genre: genre,
-            rating: rating,
-            year: year,
-            title: title
+            query: query
           }
         }}>
           <IconButton color="primary" className={classes.iconButton} aria-label="Directions">
@@ -92,53 +62,6 @@ export default function SearchBar(props) {
           </IconButton>
         </ Link>
       </Paper>
-      <TextField
-        id="outlined-with-placeholder"
-        label="Movie genre"
-        placeholder="Movie genre"
-        className={classes.textField}
-        margin="normal"
-        variant="outlined"
-        name="genre"
-        value={genre}
-        onChange={e => setGenre(e.target.value)}
-      />
-      <TextField
-        id="outlined-with-placeholder"
-        label="Movie year"
-        placeholder="Movie year"
-        className={classes.textField}
-        margin="normal"
-        variant="outlined"
-        name="year"
-        value={year}
-        onChange={e => setYear(e.target.value)}
-      />
-
-      <TextField
-        id="outlined-with-placeholder"
-        label=" Movie rating superior to"
-        placeholder="Movie rating superior to"
-        className={classes.textField}
-        margin="normal"
-        variant="outlined"
-        name="rating"
-        value={rating}
-        onChange={e => setRating(e.target.value)}
-      />
-
-
-      <TextField
-        id="outlined-with-placeholder"
-        label="Movie title"
-        placeholder="Movie title"
-        className={classes.textField}
-        margin="normal"
-        variant="outlined"
-        name="title"
-        value={title}
-        onChange={e => setTitle(e.target.value)}
-      />
     </>
   );
 }

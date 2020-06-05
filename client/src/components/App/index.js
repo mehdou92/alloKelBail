@@ -1,45 +1,36 @@
 import React from 'react';
 import Navbar from '../Navbar';
 import AuthProvider from '../Auth/AuthProvider';
-import Card from '../Card';
-import useFetchMovies from '../../hooks/useFetchMovies';
 import Footer from '../Footer';
-import ListMovies from '../ListMovies';
 import Router from '../Router';
 import { BrowserRouter } from 'react-router-dom';
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+
+import { getReducer } from 'sparql-connect'
+
+import ResourcesList from '../listSparql';
+
+//`getReducer` creates the reducer used by sparql-connect
+const store =  createStore(getReducer())
 
 function App() {
-
-  const [{ data, isLoading, isError }, doFetch] = useFetchMovies('http://localhost:3000/movies');
-
-  const displayCardMovie = (data) => {
-    if(!data.hits){
-      let tmpTab = [];
-      data.forEach(element => {
-        tmpTab.push(<Card title={element.Title} plot={element.Plot} poster={element.Poster} imdbId={element.imdbID} />)
-      });
-      return tmpTab;
-    }
-  }
+  console.log('redux store', store)
 
   return (
-    <AuthProvider>
-      <BrowserRouter>
-      <Navbar />
-      {/* <ListMovies /> */}
-      {/* {doFetch}
-      {isLoading ? (
-        <h1>LOADING</h1>
-        ) : (
-          displayCardMovie(data)
-        )} */}
-        <Router />
-        <Footer />
-
-      </BrowserRouter>
-
-    </AuthProvider>
-
+    // <Provider store={store}>
+    // <AuthProvider>
+    //   <BrowserRouter>
+    //   <Navbar />
+    //   <ResourcesList />
+    //     <Router />
+    //     <Footer />
+    //   </BrowserRouter>
+    // </AuthProvider>
+    // </Provider>
+    <Provider store={store}>
+      <ResourcesList />
+    </Provider>
   );
 }
 

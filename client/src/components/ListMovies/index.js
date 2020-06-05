@@ -4,6 +4,7 @@ import Card from '../Card';
 import Grid from "@material-ui/core/Grid/Grid";
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from "@material-ui/core/Typography/Typography";
+import ResourcesList from '../listSparql';
 
 
 const useStyles = makeStyles(theme => ({

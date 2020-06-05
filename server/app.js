@@ -47,6 +47,7 @@ stream.on('error', function (err) {
 const express = require('express');
 const movieRouter = require('./routes/movies');
 const userRouter = require('./routes/user');
+const neptuneRouter = require('./routes/neptune');
 const securityRouter = require('./routes/security');
 const verifyToken = require('./middlewares/security');
 const bodyparser = require('body-parser');
@@ -60,6 +61,7 @@ app.use(bodyparser.json());
 app.use('/', securityRouter);
 app.use('/users', userRouter);
 app.use('/movies', movieRouter);
+app.use('/neptune', neptuneRouter);
 app.use(verifyToken);
 
 // // create mapping for elk

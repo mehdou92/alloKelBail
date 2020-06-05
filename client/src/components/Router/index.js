@@ -8,10 +8,13 @@ import MovieCard from '../MovieCard';
 import ListMovies from '../ListMovies';
 import SearchMovie from '../SearchMovie';
 import DisplaySearch from "../DisplaySearch";
+import List from '../List';
 
 const Router = () => (
     <>
+        {/* <Route path="/" exact component={ListMovies} /> */}
         <Route path="/" exact component={ListMovies} />
+        <Route path="/search-result" exact component={List} />
         <Route path="/login" exact component={SignIn} />
         <Route path="/profile" exact component={Profile} />
         <Route path="/logout" render={() => (

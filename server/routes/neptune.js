@@ -36,3 +36,5 @@ router.get("/insert-data-graph", async function(req, res) {
       .catch(err => console.log(err));
     return res.send(data);
 });
+
+module.exports = router;

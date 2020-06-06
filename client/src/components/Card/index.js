@@ -51,7 +51,7 @@ export default function ImgMediaCard(props) {
     console.log("like movie");
     try {
       const response = await axios.get(
-        `https://localhost:3000/neptune/insert-data-graph`
+        `http://localhost:3000/neptune/insert-data-graph`
       );
       console.log(response);
     } catch (error) {

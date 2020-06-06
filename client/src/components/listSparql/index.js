@@ -10,37 +10,33 @@ const keyword = "Ghost";
 
 //Write a query that returns some resources with the additional field `label`
 const query = `
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+PREFIX p: <http://www.wikidata.org/prop/> 
 PREFIX pq: <http://www.wikidata.org/prop/qualifier/> 
 PREFIX ps: <http://www.wikidata.org/prop/statement/> 
-PREFIX p: <http://www.wikidata.org/prop/> 
+PREFIX wikibase: <http://wikiba.se/ontology#> 
+PREFIX bd: <http://www.bigdata.com/rdf#> 
 PREFIX wd: <http://www.wikidata.org/entity/> 
 PREFIX wdt: <http://www.wikidata.org/prop/direct/> 
-PREFIX mwapi: <https://www.mediawiki.org/ontology#API/> 
-PREFIX bd: <http://www.bigdata.com/rdf#> 
-PREFIX wikibase: <http://wikiba.se/ontology#> 
-SELECT ?title ?realLabel  ?sortie (group_concat(?genreLabel;separator=" / ") as ?genre)   ?img WHERE {
-  SERVICE wikibase:mwapi {
-      bd:serviceParam wikibase:endpoint "www.wikidata.org";
-                      wikibase:api "EntitySearch";
-                      mwapi:search "${keyword}";
-                      mwapi:language "fr".
-      ?filmIri wikibase:apiOutputItem mwapi:item.
-  }  ?filmIri wdt:P31 wd:Q11424 ;
-           wdt:P1476  ?title ;
-           wdt:P136 ?genre;
-           wdt:P57 ?real.
-   OPTIONAL{
-          ?filmIri wdt:P18 ?img .
-  }  ?filmIri p:P577 [ 
-           ps:P577 ?sortie ;
-           pq:P291 wd:Q142 
-  ]  SERVICE wikibase:label { 
-    bd:serviceParam wikibase:language "fr,en". 
-    ?genre rdfs:label ?genreLabel .
-    ?real rdfs:label ?realLabel .
-  }}
-group by ?title ?realLabel ?img ?sortie ?label
+SELECT DISTINCT ?title ?sortie (group_concat(?genreLabel;separator=" / ") as ?genre) ?realLabel ?distributeurLabel ?img
+WHERE {
+        ?filmIri wdt:P31 wd:Q11424.
+        ?filmIri wdt:P1476 ?title.
+          ?filmIri wdt:P136 ?genre; 
+                   wdt:P57 ?real;
+                   wdt:P750 ?distributeur;
+                   wdt:P18 ?img .
+          ?filmIri p:P577 [ 
+            ps:P577 ?sortie ;
+            pq:P291 wd:Q142 
+          ]
+        SERVICE wikibase:label { 
+          bd:serviceParam wikibase:language "fr". 
+          ?genre rdfs:label ?genreLabel .
+          ?real rdfs:label ?realLabel .
+          ?distributeur rdfs:label ?distributeurLabel .
+        }
+}
+group by ?title ?realLabel ?distributeurLabel ?img ?sortie
 having (count(?genre) > 2) 
 LIMIT 100
 `;

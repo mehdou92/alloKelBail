@@ -8,12 +8,13 @@ import MovieCard from '../MovieCard';
 import ListMovies from '../ListMovies';
 import SearchMovie from '../SearchMovie';
 import DisplaySearch from "../DisplaySearch";
+import ListSparql from "../listSparql";
 import List from '../List';
 
 const Router = () => (
     <>
         {/* <Route path="/" exact component={ListMovies} /> */}
-        <Route path="/" exact component={ListMovies} />
+        <Route path="/" exact component={ListSparql} />
         <Route path="/search-result" exact component={List} />
         <Route path="/login" exact component={SignIn} />
         <Route path="/profile" exact component={Profile} />
